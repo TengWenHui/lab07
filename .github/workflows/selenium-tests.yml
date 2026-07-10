@@ -106,10 +106,10 @@ jobs:
           cat server.log
           exit 1
 
-      - name: Wait for Selenium server
+        - name: Wait for Selenium server
         run: |
           for i in $(seq 1 20); do
-            if curl --fail --silent "$SELENIUM_STATUS_URL" | grep -q '"ready":true'; then
+            if curl --fail --silent "$SELENIUM_STATUS_URL" | grep -Eq '"ready"[[:space:]]*:[[:space:]]*true'; then
               echo "Selenium Grid is ready."
               exit 0
             fi
