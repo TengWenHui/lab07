@@ -1,12 +1,12 @@
 {
   "type": "module",
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^5.2.1"
   },
   "devDependencies": {
-    "chai": "^5.1.2",
-    "mocha": "^11.0.1",
-    "selenium-webdriver": "^4.27.0"
+    "chai": "^6.2.2",
+    "mocha": "^11.7.6",
+    "selenium-webdriver": "^4.45.0"
   },
   "scripts": {
     "test": "mocha tests/*.js"
