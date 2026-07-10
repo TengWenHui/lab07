@@ -50,7 +50,8 @@ jobs:
 
     env:
       TEST_BASE_URL: http://testserver:3000
-      SELENIUM_HOST: http://selenium:4444/wd/hub
+      SELENIUM_URL: http://selenium:4444/wd/hub
+      SELENIUM_STATUS_URL: http://selenium:4444/status
 
     services:
       selenium:
@@ -108,7 +109,8 @@ jobs:
       - name: Wait for Selenium server
         run: |
           for i in $(seq 1 20); do
-            if curl --fail "$SELENIUM_HOST"; then
+            if curl --fail --silent "$SELENIUM_STATUS_URL" | grep -q '"ready":true'; then
+              echo "Selenium Grid is ready."
               exit 0
             fi
 
@@ -117,6 +119,7 @@ jobs:
           done
 
           echo "Selenium server did not become ready."
+          curl --silent "$SELENIUM_STATUS_URL" || true
           exit 1
 
       - name: Run Selenium tests
