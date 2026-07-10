@@ -95,6 +95,7 @@ jobs:
         run: |
           for i in $(seq 1 10); do
             if curl --fail http://localhost:3000; then
+              echo "Node.js server is ready."
               exit 0
             fi
 
@@ -106,7 +107,7 @@ jobs:
           cat server.log
           exit 1
 
-        - name: Wait for Selenium server
+      - name: Wait for Selenium server
         run: |
           for i in $(seq 1 20); do
             if curl --fail --silent "$SELENIUM_STATUS_URL" | grep -Eq '"ready"[[:space:]]*:[[:space:]]*true'; then
